@@ -181,7 +181,11 @@
     
     if (customUrlRequest) {
         __block NSURLSessionDataTask *dataTask = nil;
-        dataTask = [_manager dataTaskWithRequest:customUrlRequest completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        dataTask = [_manager dataTaskWithRequest:request uploadProgress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } downloadProgress:^(NSProgress * _Nonnull downloadProgress) {
+            
+        } completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
             [self handleRequestResult:dataTask responseObject:responseObject error:error];
         }];
         request.requestTask = dataTask;
